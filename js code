@@ -1,0 +1,69 @@
+import React, { useState } from "react";
+import "./styles.css";
+
+export default function App() {
+  const [page, setPage] = useState("overview");
+
+  const projects = [
+    { name: "Portfolio Website", status: "Completed", deadline: "2025-08-01" },
+    { name: "E-commerce App", status: "In Progress", deadline: "2025-09-15" },
+    { name: "Blog CMS", status: "Pending", deadline: "2025-10-01" }
+  ];
+
+  return (
+    <div className="app">
+      <aside className="sidebar">
+        <h2>Dashboard</h2>
+        <button onClick={() => setPage("overview")}>Overview</button>
+        <button onClick={() => setPage("projects")}>Projects</button>
+      </aside>
+
+      <main className="main">
+        <header className="topbar">
+          <h1>Freelance Admin Panel</h1>
+        </header>
+
+        {page === "overview" && (
+          <section>
+            <h2>Overview</h2>
+            <div className="cards">
+              <div className="card">Total Projects: 3</div>
+              <div className="card">Earnings: $4500</div>
+              <div className="card">Tasks Due: 5</div>
+            </div>
+            <h3>Recent Activity</h3>
+            <ul>
+              <li>Updated blog layout</li>
+              <li>Deployed e-commerce app</li>
+              <li>Fixed contact form bug</li>
+            </ul>
+          </section>
+        )}
+
+        {page === "projects" && (
+          <section>
+            <h2>Projects</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Status</th>
+                  <th>Deadline</th>
+                </tr>
+              </thead>
+              <tbody>
+                {projects.map((proj, i) => (
+                  <tr key={i}>
+                    <td>{proj.name}</td>
+                    <td>{proj.status}</td>
+                    <td>{proj.deadline}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
+        )}
+      </main>
+    </div>
+  );
+}
