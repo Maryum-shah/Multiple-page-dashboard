@@ -1,0 +1,74 @@
+import React from "react";
+import { Bar } from "react-chartjs-2";
+
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+// Register chart components
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+
+const Overview = () => {
+  const chartData = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    datasets: [
+      {
+        label: "Monthly Earnings ($)",
+        data: [500, 700, 400, 900, 650, 750],
+        backgroundColor: "#007BFF",
+        borderRadius: 5,
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: { position: "top" },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
+  return (
+    <div>
+      <h1>Dashboard Overview</h1>
+
+      <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+        <div
+          style={{ background: "#eee", padding: "20px", borderRadius: "8px" }}
+        >
+          <h3>Total Projects</h3>
+          <p>8</p>
+        </div>
+        <div
+          style={{ background: "#eee", padding: "20px", borderRadius: "8px" }}
+        >
+          <h3>Tasks Due</h3>
+          <p>5</p>
+        </div>
+      </div>
+
+      <h2 style={{ marginTop: "40px" }}>Monthly Earnings Chart</h2>
+      <div style={{ maxWidth: "600px", marginTop: "20px" }}>
+        <Bar data={chartData} options={chartOptions} />
+      </div>
+
+      <h2 style={{ marginTop: "40px" }}>Recent Activity</h2>
+      <ul>
+        <li>Task "Design Update" was completed</li>
+        <li>Client "ABC Co." approved milestone</li>
+      </ul>
+    </div>
+  );
+};
+
+export default Overview;
